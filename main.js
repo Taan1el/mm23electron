@@ -24,15 +24,18 @@ function createWindow () {
     frame: false, 
     //opacity: 0.5,
     transparent: true,
-
+    
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
-      contextIsolation: false,
+      // nodeIntegration: true,
+      // contextIsolation: false,
     }
   })
 
-ipcMain.on('log', (event, message) => )
+  ipcMain.handle('files', (event, path) => {
+    
+    return fs.readdirSync(path);
+  });
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
